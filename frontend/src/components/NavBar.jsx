@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import '../assets/styles/NavBar.css';
 
 const Navbar = () => {
@@ -10,22 +11,19 @@ const Navbar = () => {
                     E-Voting
                 </a>
             </div>
-            <div>
-                <img id="plenki" src="..\src\assets\images\Andrej-Plenković.jpg" alt="plenki" />
-            </div>
             <div className="navbar-right">
                 <ul className="nav-links">
                     <li>
-                        <a href="#">Početna</a>
+                        <Link to="/">Početna</Link>
                     </li>
                     <li>
-                        <a href="#">Glasaj</a>
+                        <Link to="/vote">Glasaj</Link>
                     </li>
                     <li>
-                        <a href="#">Rezultati</a>
+                        <Link to="/result">Rezultati</Link>
                     </li>
                     <li>
-                        <a href="#">Kontakt</a>
+                        <Link to="/contact">Kontakt</Link>
                     </li>
                 </ul>
             </div>
