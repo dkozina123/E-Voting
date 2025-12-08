@@ -10,6 +10,9 @@ const Navbar = () => {
                     E-Voting
                 </a>
             </div>
+            <div>
+                <img id="plenki" src="..\src\assets\images\Andrej-Plenković.jpg" alt="plenki" />
+            </div>
             <div className="navbar-right">
                 <ul className="nav-links">
                     <li>
