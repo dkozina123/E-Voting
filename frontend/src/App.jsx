@@ -1,17 +1,37 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import Home from './pages/Home.jsx';
 import Vote from './pages/Vote.jsx';
 import Result from './pages/Result.jsx';
 import Contact from './pages/Contact.jsx';
+import Admin from "./pages/Admin.jsx";
+import Login from "./pages/Login.jsx";
+import Navbar from "./components/NavBar.jsx";
+import "./App.css";
 
 function App() {
+  const [role, setRole] = useState(null);
+  const [candidates, setCandidates] = useState(null);
   return (
     <BrowserRouter>
+      <Navbar role={role} setRole={setRole} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/vote" element={<Vote />} />
+        <Route path="/" element={<Login setRole={setRole} />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/vote" element={<Vote role={role} candidates={candidates} setCandidates={setCandidates} />} />
         <Route path="/result" element={<Result />} />
         <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/admin"
+          element={
+            role === "admin" ? (
+              <Admin candidates={candidates} setCandidates={setCandidates}/>
+            ) : (
+              <h1>Zabranjen pristup</h1>
+            )
+          }
+          
+        />
       </Routes>
     </BrowserRouter>
   );
