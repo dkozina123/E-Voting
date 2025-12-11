@@ -1,3 +1,4 @@
+import "../assets/styles/VoteSection.css";
 function VoteSection({candidates, setCandidates}) {
   if (candidates===null){
     return (<h2>Glasanje još nije otvoreno.</h2>);
@@ -15,17 +16,17 @@ function VoteSection({candidates, setCandidates}) {
   );
   
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Voting</h2>
+    <div className="vote-section">
+      <h2>Glasanje</h2>
 
       {candidates.map(c => (
-        <div key={c.id}>
+        <div className="candidate" key={c.id}>
           {c.name} — {c.votes}
-          <button onClick={() => vote(c.id)}>Vote</button>
+          <button onClick={() => vote(c.id)}>Glasaj</button>
         </div>
       ))}
 
-      <h3>Winner: {winner.name}</h3>
+      <h3>Pobjednik: {winner.name}</h3>
     </div>
   );
 }

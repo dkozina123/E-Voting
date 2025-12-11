@@ -1,7 +1,7 @@
 button {
-  background-color: red; /* red */
+  background-color: red;
   color: white;
-  border: none;
+  border: 2px solid darkred;
   border-radius: 5px;
   padding: 8px 16px;
   font-size: 16px;
@@ -10,11 +10,11 @@ button {
 }
 
 button:hover {
-  background-color: darkred; /* darker red on hover */
+  background-color: darkred;
 }
 
 button:active {
-  background-color: black; /* even darker when clicked */
+  background-color: black;
 }
 
 button:disabled {
@@ -23,7 +23,7 @@ button:disabled {
 }
 
 input {
-  padding: 10px 15px;
+  padding: 8px 16px;
   font-size: 16px;
   border: 2px solid #ccc;
   border-radius: 8px;

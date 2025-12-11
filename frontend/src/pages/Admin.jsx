@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../assets/styles/Admin.css';
 
 function Admin({ candidates, setCandidates }) {
   const [newCandidate, setNewCandidate] = useState("");
@@ -29,36 +30,42 @@ function Admin({ candidates, setCandidates }) {
   };
 
   return (
-    <div style={{ padding: 20 }}>
+    <div className="admin-panel">
       <h1>Panel za admine</h1>
+      <div className="admin-candidate-list">
+        <h2>Trenutni kandidati</h2>
+        {candidates && candidates.length > 0 ? (
+          candidates.map((c) => (
+            <div className="admin-candidate" key={c.id}>
+              <span>
+                {c.name} — {c.votes} glas/glasova
+              </span>
 
-      <h2>Trenutni kandidati</h2>
-      {candidates ? (
-        candidates.map((c) => (
-          <div key={c.id}>
-            {c.name} — {c.votes} glas/glasova
-            <button onClick={() => deleteCandidate(c.id)} style={{ marginLeft: 10 }}>
-              Izbriši
-            </button>
-          </div>
-        ))
-      ) : (
-        <p>Kandidati nisu dodani</p>
-      )}
-
+              <button
+                onClick={() => deleteCandidate(c.id)}
+              >
+                Izbriši
+              </button>
+            </div>
+          ))
+        ) : (
+          <p>Kandidati nisu dodani</p>
+        )
+      }
+      </div>
       <hr />
-
-      <h2>Dodaj kandidata</h2>
-      <input
-        value={newCandidate}
-        onChange={(e) => setNewCandidate(e.target.value)}
-        placeholder="Candidate Name"
-      />
-      <button onClick={addCandidate}>Dodaj</button>
-
-      <hr />
-
-      <button onClick={resetVotes}>Izbriši sve glasove</button>
+      <div className="admin-input-group">
+        <h2>Dodaj kandidata</h2>
+        <div className="admin-add-candidate">
+          <input
+            value={newCandidate}
+            onChange={(e) => setNewCandidate(e.target.value)}
+            placeholder="Ime kandidata"
+          />
+          <button onClick={addCandidate}>Dodaj</button>
+        </div>
+        <button onClick={resetVotes}>Izbriši sve glasove</button>
+      </div>
     </div>
   );
 }

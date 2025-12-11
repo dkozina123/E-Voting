@@ -10,10 +10,10 @@ function Login({ setRole }) {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Prijava</h1>
 
-      <button onClick={() => loginAs("user")}>Login as User</button>
-      <button onClick={() => loginAs("admin")}>Login as Admin</button>
+      <button onClick={() => loginAs("user")}>Prijavi se kao korisnik</button>
+      <button onClick={() => loginAs("admin")}>Prijavi se kao admin</button>
     </div>
   );
 }

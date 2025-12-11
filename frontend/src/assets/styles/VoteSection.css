@@ -1,0 +1,30 @@
+.vote-section {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 500px;
+  margin: 30px auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  font-family: Arial, sans-serif;
+}
+
+.vote-section h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.candidate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2a2a2a;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #444;
+}
+
+.candidate strong {
+  font-size: 18px;
+}

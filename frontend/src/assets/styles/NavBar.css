@@ -1,4 +1,4 @@
-a {
+/*a {
     text-decoration: none;
     color: black;
 }
@@ -22,6 +22,7 @@ a:active {
 
 .navbar {
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
     font-size: 25px;
@@ -41,4 +42,65 @@ a:active {
 
 #plenki{
     width: 100px;
+}*/
+
+.navbar {
+  width: 100%;
+  min-width: 680px;
+  height: 60px;
+  background-color: #1e1e1e;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-left a {
+  color: red;
+  font-size: 22px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.navbar-left a:hover {
+  color: #b30000;
+}
+
+.navbar-right .nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.nav-links a:hover {
+  background-color: #333;
+}
+
+.nav-links .active {
+  background-color: #8B0000;
+}
+
+.navbar-right li:last-child a {
+  background-color: #8B0000;
+  padding: 8px 14px;
+}
+
+.navbar-right li:last-child a:hover {
+  background-color: #6A0000;
 }
