@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const HARD_USERS = [
   { username: "admin", password: "adminpass", role: "admin" },
   { username: "user", password: "userpass", role: "user" },
+  { username: "user1", password: "userpass1", role: "user" }
 ];
 
 export default function Login({ setRole }) {

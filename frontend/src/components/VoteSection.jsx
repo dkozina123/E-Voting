@@ -1,20 +1,23 @@
 import "../assets/styles/VoteSection.css";
-function VoteSection({candidates, setCandidates}) {
-  if (candidates===null){
-    return (<h2>Glasanje još nije otvoreno.</h2>);
+
+function VoteSection({ candidates, setCandidates }) {
+  if (!candidates || candidates.length === 0) {
+    return <h2>Glasanje još nije otvoreno.</h2>;
   }
+
   function vote(id) {
     setCandidates(prev =>
       prev.map(c =>
-        c.id === id ? { ...c, votes: c.votes + 1 } : c
+        c.id === id ? { ...c, votes: (c.votes || 0) + 1 } : c
       )
     );
   }
 
-  const winner = candidates.reduce((max, c) =>
-    c.votes > max.votes ? c : max
+  const winner = candidates.reduce(
+    (max, c) => (c.votes > max.votes ? c : max),
+    candidates[0]
   );
-  
+
   return (
     <div className="vote-section">
       <h2>Glasanje</h2>
