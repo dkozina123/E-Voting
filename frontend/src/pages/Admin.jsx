@@ -21,12 +21,17 @@ function Admin({ candidates, setCandidates }) {
     const confirmed = window.confirm("Potvrdi");
     if (confirmed) {
       setCandidates(candidates.map((c) => ({ ...c, votes: 0 })));
+      localStorage.removeItem("votedUsers");
+      alert("Svi glasovi su resetirani. Korisnici mogu glasati ponovno.");
     }
   };
 
   const deleteCandidate = (id) => {
     if (!candidates) return;
-    setCandidates(candidates.filter((c) => c.id !== id));
+    const confirmed = window.confirm("Potvrdi");
+    if(confirmed){
+      setCandidates(candidates.filter((c) => c.id !== id));
+    }
   };
 
   return (

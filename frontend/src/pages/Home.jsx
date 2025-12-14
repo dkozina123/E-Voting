@@ -1,5 +1,6 @@
 import '../assets/styles/Home.css';
-import homeimage from '../assets/images/josjedancetnik.jpg';
+import homeimage from '../assets/images/voting.png';
+import homeimage2 from '../assets/images/izbori.jpg';
 function Home() {
     return (
         <>
@@ -15,7 +16,10 @@ function Home() {
                 <p className="home-p">Internetska stranica namijenjena je svim punoljetnim građanima Republike Hrvatske i implementira najviše standarde sigurnosti, autentifikacije i validacije glasova, 
                     čime se osigurava pouzdanost i integritet izbornog procesa.</p>
                 </div>
-                <img src={homeimage} alt="Početna slika" />
+                <div className="home-images">
+                    <img src={homeimage} alt="Početna slika" />
+                    <img src={homeimage2} alt="Početna slika 2" />
+                </div>
             </span>
         </>);
 }
