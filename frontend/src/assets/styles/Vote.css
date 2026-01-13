@@ -1,0 +1,150 @@
+.election-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.election-card {
+  background-color: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: var(--border-radius-lg);
+  width: 280px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.election-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.election-card.open {
+  border-bottom: 4px solid var(--accent);
+}
+
+.election-card.closed {
+  border-bottom: 4px solid var(--danger);
+  opacity: 0.8;
+}
+
+.election-card h2 {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.election-card p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.election-card button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  /* Pill */
+  font-weight: 600;
+  width: 100%;
+}
+
+.election-card button:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.4);
+}
+
+.election-card button:disabled {
+  background-color: #4b5563;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Admin Panel Button Style */
+.btn-admin-panel {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vote-header {
+  display: flex;
+  justify-content: center;
+  /* Center them together */
+  align-items: center;
+  max-width: 1000px;
+  margin: 40px auto 20px auto;
+  padding: 0 1rem;
+  flex-wrap: wrap;
+  gap: 30px;
+  /* Comfortable gap between title and button */
+}
+
+.vote-header h1 {
+  margin: 0;
+}
+
+
+.btn-admin-panel:hover {
+  background-color: var(--bg-card);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.vote-page-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.btn-back {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-back:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+  transform: translateX(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

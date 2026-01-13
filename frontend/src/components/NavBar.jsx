@@ -1,42 +1,50 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import '../assets/styles/NavBar.css';
 
-const Navbar = ({ currentUser, setCurrentUser }) => {
-  const navigate = useNavigate();
+const Navbar = ( {role, setRole} ) => {
+    const navigate = useNavigate();
+    let content;
 
-  const authLink = !currentUser ? (
-    <Link to="/">Prijava</Link>
-  ) : (
-    <Link
-      to="/"
-      onClick={() => {
-        setCurrentUser(null);
-        navigate("/");
-      }}
-    >
-      Odjava
-    </Link>
-  );
+    if (role === null) {
+        content = <Link to="/">Prijava</Link>;
+    } else {
+        content = <Link to="/home" onClick={() => {
+            setRole(null);
+            navigate("/");
+          }
+        }>Odjava</Link>;
+    }
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        <a href="#">E-Voting</a>
-      </div>
-      <div className="navbar-right">
-        <ul className="nav-links">
-          <li><Link to="/home">Početna</Link></li>
-          <li><Link to="/vote">Glasaj</Link></li>
-          <li><Link to="/result">Rezultati</Link></li>
-          <li><Link to="/contact">Kontakt</Link></li>
-          {currentUser?.role === "admin" && (
-            <li><Link to="/admin">Admin panel</Link></li>
-          )}
-          <li>{authLink}</li>
-        </ul>
-      </div>
-    </nav>
-  );
+    return (
+
+        <nav className="navbar">
+            <div className="navbar-left">
+                <a href="#">
+                    E-Voting
+                </a>
+            </div>
+            <div className="navbar-right">
+                <ul className="nav-links">
+                    <li>
+                        <Link to="/home">Početna</Link>
+                    </li>
+                    <li>
+                        <Link to="/vote">Glasaj</Link>
+                    </li>
+                    <li>
+                        <Link to="/result">Rezultati</Link>
+                    </li>
+                    <li>
+                        <Link to="/contact">Kontakt</Link>
+                    </li>
+                    <li>
+                        {content}
+                    </li>
+                </ul>
+            </div>
+        </nav >
+    );
 };
 
 export default Navbar;

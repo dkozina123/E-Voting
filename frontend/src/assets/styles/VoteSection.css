@@ -1,30 +1,62 @@
 .vote-section {
-  background-color: #1e1e1e;
-  color: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 500px;
-  margin: 30px auto;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-  font-family: "Roboto Slab", serif;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 40px;
+  border-radius: var(--border-radius-lg);
+  max-width: 600px;
+  width: 100%;
+  margin: 40px auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .vote-section h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: var(--text-primary);
 }
 
 .candidate {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2a2a2a;
-  padding: 12px 15px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  border: 1px solid #444;
+  background-color: var(--bg-card);
+  padding: 15px 20px;
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.candidate:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.03);
+  /* Subtle highlight */
+}
+
+.btn-vote {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-vote:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.btn-vote:active {
+  transform: translateY(0);
 }
 
 .candidate strong {
-  font-size: 18px;
+  font-size: 1.1rem;
+  font-weight: 500;
 }

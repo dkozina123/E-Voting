@@ -1,75 +1,88 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../assets/styles/Admin.css';
+import AdminElectionControl from "../components/AdminElectionControl";
+import AdminCandidateManager from "../components/AdminCandidateManager";
 
 function Admin({ candidates, setCandidates }) {
-  const [newCandidate, setNewCandidate] = useState("");
+  const [elections, setElections] = useState([]);
 
-  const addCandidate = () => {
-    if (!newCandidate) return;
+  useEffect(() => {
+    fetch("http://localhost:5000/api/elections")
+      .then(res => res.json())
+      .then(data => setElections(data))
+      .catch(err => console.error(err));
+  }, []);
 
-    if (!candidates) {
-      setCandidates([{ id: Date.now(), name: newCandidate, votes: 0 }]);
-    } else {
-      setCandidates([...candidates, { id: Date.now(), name: newCandidate, votes: 0 }]);
+  const updateElection = async (name, startTime, endTime) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/elections/update", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, startTime, endTime }),
+      });
+      const updatedElection = await res.json();
+      setElections(prev => prev.map(e => e.name === name ? updatedElection : e));
+    } catch (err) {
+      console.error(err);
     }
-
-    setNewCandidate("");
   };
 
-  const resetVotes = () => {
-    if (!candidates) return;
-    const confirmed = window.confirm("Potvrdi");
+  const addCandidate = async (name, electionType) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/candidates", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, electionType }),
+      });
+      const data = await res.json();
+      setCandidates([...candidates, data]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const resetVotes = async () => {
+    const confirmed = window.confirm("Jeste li sigurni da želite resetirati SVE glasove?");
     if (confirmed) {
-      setCandidates(candidates.map((c) => ({ ...c, votes: 0 })));
-      localStorage.removeItem("votedUsers");
-      alert("Svi glasovi su resetirani. Korisnici mogu glasati ponovno.");
+      try {
+        const res = await fetch("http://localhost:5000/api/candidates/reset_votes", {
+          method: "POST",
+        });
+        const data = await res.json();
+        setCandidates(data);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
-  const deleteCandidate = (id) => {
-    if (!candidates) return;
-    const confirmed = window.confirm("Potvrdi");
-    if(confirmed){
-      setCandidates(candidates.filter((c) => c.id !== id));
+  const deleteCandidate = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/api/candidates/${id}`, {
+        method: "DELETE",
+      });
+      setCandidates(candidates.filter((c) => c._id !== id));
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return (
-    <div className="admin-panel">
-      <h1>Panel za admine</h1>
-      <div className="admin-candidate-list">
-        <h2>Trenutni kandidati</h2>
-        {candidates && candidates.length > 0 ? (
-          candidates.map((c) => (
-            <div className="admin-candidate" key={c.id}>
-              <span>
-                {c.name} — {c.votes} glas/glasova
-              </span>
+    <div className="admin-container">
+      <h1>Panel za Admine</h1>
 
-              <button
-                onClick={() => deleteCandidate(c.id)}
-              >
-                Izbriši
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>Kandidati nisu dodani</p>
-        )
-      }
-      </div>
-      <hr />
-      <div className="admin-input-group">
-        <h2>Dodaj kandidata</h2>
-        <div className="admin-add-candidate">
-          <input
-            value={newCandidate}
-            onChange={(e) => setNewCandidate(e.target.value)}
-            placeholder="Ime kandidata"
-          />
-          <button onClick={addCandidate}>Dodaj</button>
-        </div>
-        <button onClick={resetVotes}>Izbriši sve glasove</button>
+      <div className="admin-grid">
+        <AdminElectionControl
+          elections={elections}
+          updateElection={updateElection}
+        />
+
+        <AdminCandidateManager
+          candidates={candidates}
+          addCandidate={addCandidate}
+          deleteCandidate={deleteCandidate}
+          resetVotes={resetVotes}
+        />
       </div>
     </div>
   );

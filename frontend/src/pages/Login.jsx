@@ -1,75 +1,87 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../assets/styles/Login.css';
 
-export default function Login({ users, currentUser, setCurrentUser }) {
+
+
+import "../assets/styles/Login.css";
+
+export default function Login({ setRole }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (currentUser) {
-      navigate("/home", { replace: true });
-    }
-  }, [currentUser, navigate]);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
-    setTimeout(() => {
-      const user = users.find(
-        (u) => u.username === username && u.password === password
-      );
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
 
-      if (!user) {
-        setError("Neispravno korisničko ime ili lozinka");
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.msg || "Login failed");
         setLoading(false);
         return;
       }
 
-      const safeUser = {
-        id: user.id,
-        username: user.username,
-        role: user.role
-      };
-
-      setCurrentUser(safeUser);
+      setRole(data.role);
+      localStorage.setItem("evote_role", data.role);
+      localStorage.setItem("evote_username", data.username);
+      localStorage.setItem("evote_voted", JSON.stringify(data.votedElections || []));
 
       setLoading(false);
       navigate("/vote");
-    }, 400);
+    } catch (err) {
+      setError("Server error");
+      setLoading(false);
+    }
   };
 
   return (
     <div className="login-container">
-      <h1>Prijava</h1>
+      <div className="login-card">
+        <h1>Prijava</h1>
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label>Korisničko ime</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              placeholder="Unesite korisničko ime"
+            />
+          </div>
+          <div className="form-group">
+            <label>Lozinka</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Unesite lozinku"
+            />
+          </div>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Korisničko ime"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Lozinka"
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Prijava..." : "Prijavi se"}
-        </button>
-      </form>
+          {error && <div className="error-msg">{error}</div>}
 
-      {error && <div>{error}</div>}
-      <small>Za demo: admin/adminpass ili user/userpass</small>
+          <button type="submit" className="btn-login" disabled={loading}>
+            {loading ? "Prijava..." : "Prijavi se"}
+          </button>
+        </form>
+
+        <div className="demo-info">
+          <small>Za demo: admin/adminpass ili user/userpass</small>
+        </div>
+      </div>
     </div>
   );
 }

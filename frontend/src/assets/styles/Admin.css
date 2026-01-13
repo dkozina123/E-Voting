@@ -1,42 +1,347 @@
-.admin-panel {
-  background-color: #1e1e1e;
-  color: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 550px;
+.admin-container {
+  max-width: var(--max-width);
   margin: 40px auto;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-  font-family: Arial, sans-serif;
+  color: var(--text-primary);
+  padding: 0 1rem;
 }
 
-.admin-panel h1 {
+.admin-container h1 {
   text-align: center;
-  margin-bottom: 20px;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: -1px;
 }
 
-.admin-candidate-list {
-  margin-top: 10px;
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+}
+
+.admin-section {
+  background-color: var(--bg-surface);
+  padding: 30px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-section h2 {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
   margin-bottom: 25px;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.admin-candidate {
+/* Election Control Styles */
+.election-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-card {
+  background-color: var(--bg-card);
+  padding: 20px 25px;
+  border-radius: var(--border-radius);
+  border-left: 5px solid #555;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2a2a2a;
-  padding: 12px 15px;
-  border-radius: 8px;
-  border: 1px solid #444;
-  margin-bottom: 12px;
+  gap: 30px;
+  /* Added gap for separation */
+  flex-wrap: wrap;
+  /* Allow wrapping on small screens */
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.admin-input-group {
+.admin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.admin-card.open {
+  border-left-color: var(--accent);
+}
+
+.admin-card.closed {
+  border-left-color: var(--danger);
+}
+
+.admin-card.scheduled {
+  border-left-color: #f59e0b;
+  /* Amber */
+}
+
+.admin-card h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  /* Slightly larger */
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  /* More space below title */
+}
+
+.status-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  padding: 8px 12px;
+  /* Bigger touch target */
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.election-controls {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.election-controls label {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0;
+  /* Reset margin */
+}
+
+.input-row {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
-  flex-direction: column;
+  align-items: center;
 }
 
-.admin-add-candidate input{
-  margin-right: 5px;
+.time-selects {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.election-controls input,
+.election-controls select {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  height: 38px;
+}
+
+.election-controls select {
+  padding: 0 4px;
+  background-color: transparent !important;
+  border: none;
+}
+
+.election-controls input[type="date"] {
+  width: auto;
+}
+
+.election-controls input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+  cursor: pointer;
+}
+
+.btn-update {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-update:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Candidate Manager Styles */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px 8px 0 0;
+}
+
+.tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.add-candidate-form {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.add-candidate-form input {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+
+.add-candidate-form input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.btn-add {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0 25px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-add:hover {
+  background-color: var(--primary-hover);
+}
+
+.candidate-list {
+  max-height: 450px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Custom scrollbar for container */
+.candidate-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.candidate-item {
+  background-color: var(--bg-card);
+  padding: 15px;
+  border-radius: var(--border-radius);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.candidate-item:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.candidate-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  /* The gap requested */
+}
+
+.candidate-info strong {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.vote-count {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.btn-delete {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-delete:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.empty-msg {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 30px;
+  opacity: 0.7;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 30px 0;
+}
+
+.danger-zone {
+  text-align: right;
+  padding-top: 10px;
+}
+
+.btn-danger {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-danger:hover {
+  background-color: var(--danger);
+  color: white;
 }

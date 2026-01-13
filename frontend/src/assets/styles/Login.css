@@ -1,30 +1,114 @@
 .login-container {
-  background-color: #1e1e1e;
-  color: white;
-  padding: 40px;
-  border-radius: 10px;
-  width: 350px;
-  margin: 40px auto;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-  font-family: "Roboto Slab", serif;
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - var(--nav-height));
+    padding: 20px;
 }
 
-.login-container h1 {
-  text-align: center;
-  margin-bottom: 20px;
+.login-card {
+    background-color: var(--bg-surface);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 0.5s ease-out;
 }
 
-.login-container form {
-  display: flex;
-  flex-direction: column;
+.login-card h1 {
+    text-align: center;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    font-size: 2rem;
 }
 
-.login-container form *{
-    margin: 5px;
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.login-container form button{
-    margin-top: 30px;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.form-group input {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 12px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.btn-login {
+    background: linear-gradient(to right, var(--primary), var(--primary-hover));
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+.btn-login:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-login:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.error-msg {
+    color: var(--danger);
+    background-color: rgba(239, 68, 68, 0.1);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.demo-info {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
